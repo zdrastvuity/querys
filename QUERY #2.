@@ -1,0 +1,86 @@
+-- A CONTINUACION ALGUNOS QUERYS SENCILLOS SONBRE LA BASE DE DATOS DE THE OFFOCE 
+
+-- GETTING AN ENTIRE TABLE 
+SELECT * FROM employee;
+SELECT * FROM works_with;
+SELECT * FROM branch;
+-- PODEMOS UTILIZAR LA CLAUSULA ORDER BY PARA, LITERALMENTE ORDENAR NUESTRA TABLA EN FUNCION DE UNA COLUMNA ESPECIFICA;
+-- EL COMANDO ORDER BY TOMA LA SIGUIENTE ESTRUCURA=:
+ SELECT * 
+ FROM employee
+ ORDER BY salary ASC; 
+ 
+ SELECT *
+ FROM employee
+ ORDER BY salary DESC; 
+ 
+ -- -- Find all employees ordered by sex then name
+SELECT * 
+FROM employee
+ORDER BY sex, name; 
+
+-- -- Find the first 5 employees in the table
+
+SELECT *
+FROM employee
+LIMIT 5 ; 
+
+-- -- Find the first and last names of all employees
+
+SELECT name, last_name
+FROM employee; 
+
+-- Find the forename and surnames names of all employees
+-- SIMPLEMENTE REALIZAREMOS UNA MASCARA A LAS COLUMNAS DESEADAS UTILIZANDO AS 
+
+SELECT name AS forename, last_name AS surname
+FROM employee; 
+
+-- Find out all the different genders
+-- ( Literalmente, cuantos elementos diferentes conforman esa columna? usaremos la clausula  DDISTINCTFG )
+SELECT DISTINCT sex
+FROM employee; 
+
+-- -- Find all male employees
+SELECT * FROM employee
+WHERE sex = 'M' ; 
+
+-- Find all employees at branch 2
+
+SELECT * 
+FROM employee 
+WHERE branch_id = 2; 
+
+-- Find all employee's id's and names who were born after 1969
+SELECT emp_id, name, last_name
+FROM employee
+WHERE birth_date >= 1969; 
+
+-- Find all female employees at branch 2
+SELECT *
+FROM employee
+WHERE sex = 'F'AND branch_id = 2;
+
+-- Find all employees who are female & born after 1969 or who make over 80000
+
+SELECT *
+FROM employee
+WHERE (sex='F' AND birth_date >=1969) OR salary > 80000;
+
+-- Find all employees born between 1970 and 1975
+
+SELECT *
+FROM employee
+WHERE birth_date between '1970-01-01' AND '1975-01-01';
+
+-- Find all employees named Jim, Michael, Johnny or David
+SELECT * 
+FROM employee
+WHERE name IN ('Jim', 'Michael', 'Johnny', 'David');
+
+
+-- PARA CAMBIAR EL NOMBRE DE UNA COLUMNA UTILIZAMOS EL QUERY 
+-- ALTER TABLE tableName CHANGE `oldcolname` `newcolname` datatype(length);
+
+ALTER TABLE employee 
+CHANGE `firat_name` `name` VARCHAR(20);
